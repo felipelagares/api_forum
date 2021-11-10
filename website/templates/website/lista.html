@@ -1,0 +1,65 @@
+{% extends "website/_layouts/base.html" %}
+
+{% block title %}Lista de Cursos{% endblock %}
+
+{% load primeira_letra %}
+
+{% block conteudo %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de Cursos</h5>
+
+          {% if cursos|length > 0 %}
+            <p class="card-text">
+              Aqui está a lista de <code>Cursos</code> cadastrados.
+            </p>
+
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">nome</th>
+                <th scope="col">universidade</th>
+                <th scope="col" class="text-center">Ações</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for curso in cursos %}
+                <tr>
+                  <th scope="row">{{ curso.nome|primeira_letra }}</th>
+                  <td>{{ curso.nome }}</td>
+                  <td>{{ curso.universidade }}</td>
+                  <td class="text-center">
+                    <a href="{% url 'website:atualiza_curso' pk=curso.id %}"
+                       class="btn btn-primary">
+                      Atualizar
+                    </a>
+                    <a href="{% url 'website:deleta_curso' pk=curso.id %}"
+                      class="btn btn-danger">
+                        Excluir
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+            <h5>Nenhum <code>Curso</code> cadastrado ainda.</h5>
+          </div>
+        {% endif %}
+          <hr />
+          <div class="text-right">
+            <a href="{% url 'website:cadastra_curso' %}" class="btn btn-primary">
+              Cadastrar Curso
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

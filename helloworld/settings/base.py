@@ -13,7 +13,8 @@ from pathlib import Path # olhar 15:50 em caso de erro
 import os
 
 # Diretório raíz
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECRET_KEY do Django (utilize alguma ferramenta para desacoplar seu código)
 SECRET_KEY = 'z=d(chbl7uk!jnrvnlx&n1ir&9)v0@w9zr#(klew52rz+lik=x'
